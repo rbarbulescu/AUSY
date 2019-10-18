@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	 <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	
+	<style>
+		.jumbotron{
+			padding-top: 20px;
+		}
+		.page-footer{
+			border: 1px solid #4f4f4f;
+			width: 100%;
+			position: fixed;
+			height: 50xp;
+			bottom: 0px;
+		}
+		a:link, a:visited{
+			text-decoration: none;
+		}
+		a:hover{
+			text-decoration: none;
+			text-shadow: 2px 2px 5px #4f4f4f;
+		}
+		.login_btn:hover{
+			box-shadow: 2px 2px 30px #4f4f4f;
+		}
+		
+		.black{
+			background-color: #000;
+		}
+		
+		[type~="checkbox"] {
+		  	width: 20px;
+			height: 20px;
+			margin-left: 15px;
+			margin-right: 5px;
+		}
+		
+		[type~="checkbox"]:hover{
+			box-shadow: 2px 2px 20px white;
+		}
+		
+		.card{
+			border: 0px;
+		}
+		
+		.seirfFont{
+			font-family: serif;
+		}
+		
+		[placeholder~="username"], [placeholder~="password"]{
+			border-top: 0px;
+			border-left: 0px;
+			border-right: 0px;
+			border-bottom: 2px solid #c0c0c0;
+			touch-action: none;
+		}
+		
+	</style>
+	
+    <title>Login Page</title>
+  </head>
+  
+  <body class="black text-muted">
+    
+	<div class="jumbotron jumbotron-fluid black">
+		<div class="container text-center text-grey ">
+			<h1 class="display-2 seirfFont">Welcome</h1>
+			<p class="text-secondary">First login page using bootstrap</p>
+		</div>
+	</div>
+	
+	<!-- Card container -->
+	<div class="container col-sm-4 ">
+		<div class="card">
+			<form method="GET" action="home.jsp">
+				<div class="card-body black">
+					<h2 class="card-title text-center seirfFont">Login</h2>
+					<div class="input-group form-group">
+						<input type="text" class="form-control black text-muted" placeholder="username" name="username">
+					</div>
+					<div class="input-group form-group">
+						<input type="password" class="form-control black text-muted" placeholder="password" name="password">
+					</div>
+					<div class="text-center align-items-center remember">
+						<input type="checkbox" class="align-items-center">Remember me
+					</div>
+					<div class="card-footer form-group align-center">
+						<input type="submit" value="Login" class="btn rounded mx-auto d-block login_btn text-muted border seirfFont">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<!-- Footer container -->
+	<footer class="page-footer">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-sm-3 align-center">
+					<a href="#" class="text-muted">Create Account</a>
+				</div>
+				<div class="col-sm-3 align-center">
+					<a href="#" class="text-muted">Recover Account</a>
+				</div>
+				<div class="col-sm-3 align-center">
+					<a href="#" class="text-muted">Log in with Google Account</a>
+				</div>
+				<div class="col-sm-3 align-center">
+					<a href="#" class="text-muted">Log in with Facebook</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	
+	
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ 	-->
+  </body>
+  
+</html>
