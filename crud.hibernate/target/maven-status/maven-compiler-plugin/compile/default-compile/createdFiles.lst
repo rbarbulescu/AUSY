@@ -1,0 +1,4 @@
+crud\operations\AppMain.class
+crud\operations\DbOperations.class
+crud\operations\Admin.class
+crud\operations\student\Student.class
