@@ -1,15 +1,19 @@
-package crud.operations;
+package crud.operations.student;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-public class DbOperations {
+import crud.operations.DbOperations;
+
+public class StudentOperations {
 	
 	static Session sessionObj;
 	static SessionFactory sessionFactoryObj;
@@ -31,9 +35,9 @@ public class DbOperations {
 		return sessionFactoryObj;
 	}
 	
-	//method 1 is to insert a new admin into database
-	public static void createAdmin(String adminId, String institution) {
-		Admin admin = null;
+	//method 1 is to insert a new student into database
+	public static void createStudent(String firstname, String lastname, double phone, String address, double CNP, Date birthday, int trips, double personsID) {
+		Student student = null;
 		
 		try {
 			//getting session object from session factory
@@ -41,11 +45,9 @@ public class DbOperations {
 			sessionObj.beginTransaction();
 			
 			//create transaction entities
-			admin = new Admin();
-			admin.setAdminId(adminId);
-			admin.setInstitution(institution);
+			student = new Student();
 			
-			sessionObj.save(admin);
+			sessionObj.save(student);
 			sessionObj.getTransaction().commit();
 			
 			logger.info("\nAdmin created successfully!\n");
@@ -65,17 +67,16 @@ public class DbOperations {
 	
 	//method 2 is to display the records from the database
 	@SuppressWarnings("unchecked")
-	public static List<Admin> displayAdmins() {
-		//List<Admin> adminsList = new ArrayList<Admin>();
-		List<Admin> adminsList = null;
+	public static List<Student> displayStudents() {
+		List<Student> studentList = null;
 		
 		try {
 			//getting session object from session factory
 			sessionObj = buildSessionFactory().openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
-			adminsList = (List<Admin>) sessionObj.createCriteria(Admin.class).list();
-			logger.info("The admins available");			
+			studentList = (List<Student>) sessionObj.createCriteria(Student.class).list();
+			logger.info("The students available");			
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
@@ -87,11 +88,11 @@ public class DbOperations {
 				sessionObj.close();
 			}
 		}
-		return adminsList;
+		return studentList;
 	}
-	
-	//method 3 is used to update a record in the database table
-	public static void updateAdmin(String adminId, String institution) {
+		
+	//method 3 is used to update a student in the database table
+	public static void updateStudent(String firstname, String lastname, double phone, String address, double CNP, Date birthday, int trips, String personsID) {
 		
 		try {
 			//getting session object from session factory
@@ -100,12 +101,18 @@ public class DbOperations {
 			sessionObj.beginTransaction();
 			
 			//creating transaction entity
-			Admin adminObj = (Admin) sessionObj.get(Admin.class, adminId);
-			adminObj.setInstitution(institution);
+			Student studentObj = (Student) sessionObj.get(Student.class, CNP);
+			studentObj.setFirstname(firstname);
+			studentObj.setLastname(lastname);
+			studentObj.setPhone(phone);
+			studentObj.setAddress(address);
+			studentObj.setBirthday(birthday);
+			studentObj.setTrips(trips);
+			studentObj.setPersonsId(personsID);
 			
 			//commiting the transactions to the database
 			sessionObj.getTransaction().commit();
-			logger.info("\nAdmin with id " + adminId + " is successfully updated.");
+			logger.info("\nAdmin with id " + CNP + " is successfully updated.");
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
@@ -119,20 +126,20 @@ public class DbOperations {
 		}
 	}
 	
-	//method 4 is used to delete an admin using adminId from the table in db
-	public static void deleteAdmin(String adminId) {
+	//method 4 is used to delete a student using CNP from the table in database
+	public static void deleteStudent(double CNP) {
 		try {
 			//getting session object from session factory
 			sessionObj = buildSessionFactory().openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
 			
-			Admin adminObj = findByAdminId(adminId);
-			sessionObj.delete(adminObj);
+			Student studentObj = findByStudentCNP(CNP);
+			sessionObj.delete(studentObj);
 			
 			// Committing The Transactions To The Database
             sessionObj.getTransaction().commit();
-            logger.info("\nStudent With Id?= " + adminId + " Is Successfully Deleted From The Database!\n");
+            logger.info("\nStudent With Id?= " + CNP + " Is Successfully Deleted From The Database!\n");
         } catch(Exception sqlException) {
             if(sessionObj.getTransaction() != null) {
                 logger.info("\n.......Transaction Is Being Rolled Back.......\n");
@@ -146,15 +153,15 @@ public class DbOperations {
         }
 	}
 	
-	public static Admin findByAdminId(String find_adminId) {
-        Admin findAdminObj = null;
+	public static Student findByStudentCNP(double find_studentCNP) {
+        Student findStudentObj = null;
         try {
             // Getting Session Object From SessionFactory
             sessionObj = buildSessionFactory().openSession();
             // Getting Transaction Object From Session Object
             sessionObj.beginTransaction();
  
-            findAdminObj = (Admin) sessionObj.load(Admin.class, find_adminId);
+            findStudentObj = (Student) sessionObj.load(Student.class, find_studentCNP);
         } catch(Exception sqlException) {
             if(sessionObj.getTransaction() != null) {
                 logger.info("\nTransaction Is Being Rolled Back...\n");
@@ -162,7 +169,34 @@ public class DbOperations {
             }
             sqlException.printStackTrace();
         } 
-        return findAdminObj;
+        return findStudentObj;
     }
 	
+	// Method 5: This Method Is Used To Delete All Students From The Database Table
+    public static void deleteAllStudents() {
+        try {
+            // Getting Session Object From SessionFactory
+            sessionObj = buildSessionFactory().openSession();
+            // Getting Transaction Object From Session Object
+            sessionObj.beginTransaction();
+ 
+            Query queryObj = sessionObj.createQuery("DELETE FROM students");
+            queryObj.executeUpdate();
+ 
+            // Committing The Transactions To The Database
+            sessionObj.getTransaction().commit();
+            logger.info("\nSuccessfully Deleted All Records From The Database Table!\n");
+        } catch(Exception sqlException) {
+            if(null != sessionObj.getTransaction()) {
+                logger.info("\nTransaction Is Being Rolled Back...\n");
+                sessionObj.getTransaction().rollback();
+            }
+            sqlException.printStackTrace();
+        } finally {
+            if(sessionObj != null) {
+                sessionObj.close();
+            }
+        }
+    }
+
 }

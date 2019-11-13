@@ -15,5 +15,7 @@
  
         <!-- Mapping With Model Class Containing Annotations -->
         <mapping class="crud.operations.Admin" />
+        <mapping class="crud.operations.person.Person" />
+        <mapping class="crud.operations.student.Student" />
     </session-factory>
 </hibernate-configuration>

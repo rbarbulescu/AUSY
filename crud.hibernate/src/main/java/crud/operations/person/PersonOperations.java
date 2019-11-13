@@ -1,4 +1,4 @@
-package crud.operations;
+package crud.operations.person;
 
 import java.util.List;
 
@@ -9,7 +9,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-public class DbOperations {
+import crud.operations.DbOperations;
+
+public class PersonOperations {
 	
 	static Session sessionObj;
 	static SessionFactory sessionFactoryObj;
@@ -31,9 +33,9 @@ public class DbOperations {
 		return sessionFactoryObj;
 	}
 	
-	//method 1 is to insert a new admin into database
-	public static void createAdmin(String adminId, String institution) {
-		Admin admin = null;
+	//method 1 is to insert a new person into database
+	public static void createPerson(int id, String email, String username, String password, String typeofuser, String adminsId) {
+		Person person = null;
 		
 		try {
 			//getting session object from session factory
@@ -41,11 +43,9 @@ public class DbOperations {
 			sessionObj.beginTransaction();
 			
 			//create transaction entities
-			admin = new Admin();
-			admin.setAdminId(adminId);
-			admin.setInstitution(institution);
+			person = new Person();
 			
-			sessionObj.save(admin);
+			sessionObj.save(person);
 			sessionObj.getTransaction().commit();
 			
 			logger.info("\nAdmin created successfully!\n");
@@ -62,20 +62,19 @@ public class DbOperations {
 			}
 		}
 	}
-	
-	//method 2 is to display the records from the database
+		
+	//method 2 is to display the records from the database displaying persons
 	@SuppressWarnings("unchecked")
-	public static List<Admin> displayAdmins() {
-		//List<Admin> adminsList = new ArrayList<Admin>();
-		List<Admin> adminsList = null;
+	public static List<Person> displayPersons() {
+		List<Person> personsList = null;
 		
 		try {
 			//getting session object from session factory
 			sessionObj = buildSessionFactory().openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
-			adminsList = (List<Admin>) sessionObj.createCriteria(Admin.class).list();
-			logger.info("The admins available");			
+			personsList = (List<Person>) sessionObj.createCriteria(Person.class).list();
+			logger.info("The persons available");			
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
@@ -87,11 +86,11 @@ public class DbOperations {
 				sessionObj.close();
 			}
 		}
-		return adminsList;
+		return personsList;
 	}
 	
-	//method 3 is used to update a record in the database table
-	public static void updateAdmin(String adminId, String institution) {
+	//method 3 is used to update a person in the database table
+	public static void updatePerson(int id, String email, String username, String password, String adminsId) {
 		
 		try {
 			//getting session object from session factory
@@ -100,12 +99,14 @@ public class DbOperations {
 			sessionObj.beginTransaction();
 			
 			//creating transaction entity
-			Admin adminObj = (Admin) sessionObj.get(Admin.class, adminId);
-			adminObj.setInstitution(institution);
-			
+			Person personObj = (Person) sessionObj.get(Person.class, id);
+			personObj.setEmail(email);
+			personObj.setUsername(username);
+			personObj.setPassword(password);
+				
 			//commiting the transactions to the database
 			sessionObj.getTransaction().commit();
-			logger.info("\nAdmin with id " + adminId + " is successfully updated.");
+			logger.info("\nAdmin with id " + id + " is successfully updated.");
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
@@ -119,20 +120,20 @@ public class DbOperations {
 		}
 	}
 	
-	//method 4 is used to delete an admin using adminId from the table in db
-	public static void deleteAdmin(String adminId) {
+	//method 4 is used to delete a person using id from the table in database
+	public static void deletePerson(int id) {
 		try {
 			//getting session object from session factory
 			sessionObj = buildSessionFactory().openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
 			
-			Admin adminObj = findByAdminId(adminId);
-			sessionObj.delete(adminObj);
+			Person personObj = findByPersonId(id);
+			sessionObj.delete(personObj);
 			
 			// Committing The Transactions To The Database
             sessionObj.getTransaction().commit();
-            logger.info("\nStudent With Id?= " + adminId + " Is Successfully Deleted From The Database!\n");
+            logger.info("\nStudent With Id?= " + id + " Is Successfully Deleted From The Database!\n");
         } catch(Exception sqlException) {
             if(sessionObj.getTransaction() != null) {
                 logger.info("\n.......Transaction Is Being Rolled Back.......\n");
@@ -146,15 +147,16 @@ public class DbOperations {
         }
 	}
 	
-	public static Admin findByAdminId(String find_adminId) {
-        Admin findAdminObj = null;
+	//finding a person after his id method
+	public static Person findByPersonId(int find_personsId) {
+        Person findPersonObj = null;
         try {
             // Getting Session Object From SessionFactory
             sessionObj = buildSessionFactory().openSession();
             // Getting Transaction Object From Session Object
             sessionObj.beginTransaction();
  
-            findAdminObj = (Admin) sessionObj.load(Admin.class, find_adminId);
+            findPersonObj = (Person) sessionObj.load(Person.class, find_personsId);
         } catch(Exception sqlException) {
             if(sessionObj.getTransaction() != null) {
                 logger.info("\nTransaction Is Being Rolled Back...\n");
@@ -162,7 +164,7 @@ public class DbOperations {
             }
             sqlException.printStackTrace();
         } 
-        return findAdminObj;
+        return findPersonObj;
     }
 	
 }
