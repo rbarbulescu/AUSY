@@ -14,8 +14,11 @@
         <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
  
         <!-- Mapping With Model Class Containing Annotations -->
-        <mapping class="crud.operations.admin.Admin" />
-        <mapping class="crud.operations.person.Person" />
-        <mapping class="crud.operations.student.Student" />
+        <mapping class="crud.ovp.model.Admin" />
+        <mapping class="crud.ovp.model.Student" />
+        <mapping class="crud.ovp.model.Person" />
+        <mapping class="crud.ovp.daoimpl.AdminDAOImpl" />
+        <mapping class="crud.ovp.daoimpl.StudentDAOImpl" />
+        <mapping class="crud.ovp.daoimpl.PersonDAOImpl" />
     </session-factory>
 </hibernate-configuration>
