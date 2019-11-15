@@ -1,0 +1,7 @@
+crud\ovp\daoimpl\AdminOperations.class
+crud\ovp\daoimpl\PersonOperations.class
+crud\ovp\model\Person.class
+crud\ovp\AppMain.class
+crud\ovp\daoimpl\StudentOperations.class
+crud\ovp\model\Admin.class
+crud\ovp\model\Student.class
