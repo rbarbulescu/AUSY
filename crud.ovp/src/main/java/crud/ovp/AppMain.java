@@ -2,12 +2,12 @@ package crud.ovp;
 
 import java.util.List;
 
-import crud.ovp.model.Admin;
-import crud.ovp.model.Person;
-import crud.ovp.model.Student;
 import crud.ovp.persistence.daoimpl.AdminDAOImpl;
 import crud.ovp.persistence.daoimpl.PersonDAOImpl;
 import crud.ovp.persistence.daoimpl.StudentDAOImpl;
+import crud.ovp.persistence.model.Admin;
+import crud.ovp.persistence.model.Person;
+import crud.ovp.persistence.model.Student;
 
 public class AppMain {
 	

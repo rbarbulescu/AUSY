@@ -9,8 +9,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import crud.ovp.model.Admin;
 import crud.ovp.persistence.dao.AdminDAO;
+import crud.ovp.persistence.model.Admin;
 
 public class AdminDAOImpl implements AdminDAO{
 	

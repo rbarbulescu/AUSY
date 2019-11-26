@@ -2,7 +2,7 @@ package crud.ovp.persistence.dao;
 
 import java.util.List;
 
-import crud.ovp.model.Admin;
+import crud.ovp.persistence.model.Admin;
 
 public interface AdminDAO {
 	

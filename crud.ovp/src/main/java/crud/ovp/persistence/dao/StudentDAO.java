@@ -2,7 +2,7 @@ package crud.ovp.persistence.dao;
 
 import java.util.List;
 
-import crud.ovp.model.Student;
+import crud.ovp.persistence.model.Student;
 
 public interface StudentDAO {
 
@@ -12,5 +12,6 @@ public interface StudentDAO {
 	Student findByStudentCNP(String find_studentCNP);
 	void deleteAllStudents();
 	List<Student> displayStudents();
+	void selectStudentByCNP(String CNP);
 	
 }

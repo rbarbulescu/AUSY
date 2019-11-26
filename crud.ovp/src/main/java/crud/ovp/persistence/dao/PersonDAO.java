@@ -2,7 +2,7 @@ package crud.ovp.persistence.dao;
 
 import java.util.List;
 
-import crud.ovp.model.Person;
+import crud.ovp.persistence.model.Person;
 
 public interface PersonDAO {
 
@@ -11,5 +11,6 @@ public interface PersonDAO {
 	void deletePerson(String userName);
 	Person findByPersonUsername(String personsUsername);
 	List<Person> displayPersons();
+	void checkUserName(String userName);
 	
 }

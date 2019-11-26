@@ -14,9 +14,9 @@
         <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
  
         <!-- Mapping With Model Class Containing Annotations -->
-        <mapping class="crud.ovp.model.Admin" />
-        <mapping class="crud.ovp.model.Student" />
-        <mapping class="crud.ovp.model.Person" />
+        <mapping class="crud.ovp.persistence.model.Admin" />
+        <mapping class="crud.ovp.persistence.model.Student" />
+        <mapping class="crud.ovp.persistence.model.Person" />
 
     </session-factory>
 </hibernate-configuration>

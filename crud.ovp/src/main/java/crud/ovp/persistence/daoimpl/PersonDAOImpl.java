@@ -9,8 +9,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import crud.ovp.model.Person;
 import crud.ovp.persistence.dao.PersonDAO;
+import crud.ovp.persistence.model.Person;
 
 public class PersonDAOImpl implements PersonDAO{
 	
@@ -105,7 +105,6 @@ public class PersonDAOImpl implements PersonDAO{
 	    	sessionObj.beginTransaction();
 	    	
 	    	personObj = (Person) sessionObj.get(Person.class, userName);
-
 	    	if(personObj != null) {
 	    		System.out.print("Username found!" + personObj.toString());
 	    	}else {

@@ -1,7 +1,10 @@
-crud\ovp\daoimpl\AdminOperations.class
-crud\ovp\daoimpl\PersonOperations.class
-crud\ovp\model\Person.class
+crud\ovp\persistence\daoimpl\StudentDAOImpl.class
+crud\ovp\persistence\model\Admin.class
+crud\ovp\persistence\dao\AdminDAO.class
+crud\ovp\persistence\daoimpl\AdminDAOImpl.class
+crud\ovp\persistence\dao\StudentDAO.class
+crud\ovp\persistence\daoimpl\PersonDAOImpl.class
 crud\ovp\AppMain.class
-crud\ovp\daoimpl\StudentOperations.class
-crud\ovp\model\Admin.class
-crud\ovp\model\Student.class
+crud\ovp\persistence\model\Person.class
+crud\ovp\persistence\model\Student.class
+crud\ovp\persistence\dao\PersonDAO.class

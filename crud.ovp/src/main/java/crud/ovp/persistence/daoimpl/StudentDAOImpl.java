@@ -10,8 +10,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import crud.ovp.model.Student;
 import crud.ovp.persistence.dao.StudentDAO;
+import crud.ovp.persistence.model.Student;
 
 public class StudentDAOImpl implements StudentDAO{
 	
