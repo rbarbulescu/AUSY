@@ -2,12 +2,8 @@ package crud.ovp.persistence.daoimpl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 import crud.ovp.persistence.dao.AdminDAO;
 import crud.ovp.persistence.model.Admin;
@@ -15,48 +11,29 @@ import crud.ovp.persistence.model.Admin;
 public class AdminDAOImpl implements AdminDAO{
 	
 	static Session sessionObj;
-	static SessionFactory sessionFactoryObj;
 	
-	public final static Logger logger = Logger.getLogger(AdminDAOImpl.class);
-	
-	//this method is use to create the hibernate's SessionFactory Object
-	private static SessionFactory buildSessionFactory() {
-		//creating configuration instance & passing hibernate's configuration file
-		Configuration configObj = new Configuration();
-		configObj.configure("hibernate.cfg.xml");
-		
-		//since hibernate version 4.x ServiceRegistry is being used
-		ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(configObj.getProperties()).build(); 
-		 
-		//creating hibernate SessionFactory instance
-		sessionFactoryObj = configObj.buildSessionFactory(serviceRegistryObj);
-		
-		return sessionFactoryObj;
-	}
+	private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 	
 	//method 1 is to insert a new admin into database
-	public void createAdmin(String adminId, String institution) {
-		Admin admin = null;
+	public void createAdmin(Admin admin) {
 		
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			sessionObj.beginTransaction();
 			
 			//create transaction entities
-			admin = new Admin();
-			admin.setAdminId(adminId);
-			admin.setInstitution(institution);
-			
-			sessionObj.save(admin);
+			sessionObj.persist(admin);
 			sessionObj.getTransaction().commit();
 			
-			logger.info("\nAdmin created successfully!\n");
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
-				logger.info("\nTransaction is being rolled back...\n");
 				sessionObj.getTransaction().rollback();				
 			}
 		} finally {
@@ -74,15 +51,13 @@ public class AdminDAOImpl implements AdminDAO{
 		
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
 			adminsList = (List<Admin>) sessionObj.createCriteria(Admin.class).list();
-			logger.info("The admins available");			
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
-				logger.info("Transaction is being rolled back...");
 				sessionObj.getTransaction().rollback();
 			}
 		} finally {
@@ -98,7 +73,7 @@ public class AdminDAOImpl implements AdminDAO{
 		
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
 			
@@ -108,11 +83,9 @@ public class AdminDAOImpl implements AdminDAO{
 			
 			//commiting the transactions to the database
 			sessionObj.getTransaction().commit();
-			logger.info("\nAdmin with id " + adminId + " is successfully updated.");
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
-				logger.info("The transaction is being rolled back...");
 				sessionObj.getTransaction().rollback();
 			}
 		} finally {
@@ -126,7 +99,7 @@ public class AdminDAOImpl implements AdminDAO{
 	public void deleteAdmin(String adminId) {
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
 			
@@ -135,10 +108,8 @@ public class AdminDAOImpl implements AdminDAO{
 			
 			// Committing The Transactions To The Database
             sessionObj.getTransaction().commit();
-            logger.info("\nStudent With Id?= " + adminId + " Is Successfully Deleted From The Database!\n");
         } catch(Exception sqlException) {
             if(sessionObj.getTransaction() != null) {
-                logger.info("\n.......Transaction Is Being Rolled Back.......\n");
                 sessionObj.getTransaction().rollback();
             }
             sqlException.printStackTrace();
@@ -153,19 +124,47 @@ public class AdminDAOImpl implements AdminDAO{
         Admin findAdminObj = null;
         try {
             // Getting Session Object From SessionFactory
-            sessionObj = buildSessionFactory().openSession();
+            sessionObj = this.sessionFactory.openSession();
             // Getting Transaction Object From Session Object
             sessionObj.beginTransaction();
  
             findAdminObj = (Admin) sessionObj.load(Admin.class, find_adminId);
         } catch(Exception sqlException) {
             if(sessionObj.getTransaction() != null) {
-                logger.info("\nTransaction Is Being Rolled Back...\n");
                 sessionObj.getTransaction().rollback();
             }
             sqlException.printStackTrace();
         } 
         return findAdminObj;
     }
+	
+	//check if an admin exists in the database
+		public void checkAdminId(String adminId) {
+		    Admin adminObj = null;
+		    
+		    try {
+				//getting session object from session factory
+		    	sessionObj = this.sessionFactory.openSession();
+		    	//getting transaction object from session object
+		    	sessionObj.beginTransaction();
+		    	
+		    	adminObj = (Admin) sessionObj.get(Admin.class, adminId);
+		    	if(adminObj != null) {
+		    		System.out.println("Admin found!\n" + adminObj.toString());
+		    	}else {
+		    		System.out.println("Admin does not exists!");
+		    	}	    	
+		    	sessionObj.getTransaction().commit();
+			} catch (Exception e) {
+				// TODO: handle exception
+				if(sessionObj.getTransaction() != null) {
+					sessionObj.getTransaction().rollback();
+				}
+			} finally {
+				if(sessionObj != null) {
+					sessionObj.close();
+				}
+			}
+	    }
 	
 }

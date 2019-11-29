@@ -2,12 +2,8 @@ package crud.ovp.persistence.daoimpl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 import crud.ovp.persistence.dao.PersonDAO;
 import crud.ovp.persistence.model.Person;
@@ -17,49 +13,28 @@ public class PersonDAOImpl implements PersonDAO{
 	static Session sessionObj;
 	static SessionFactory sessionFactoryObj;
 	
-	public final static Logger logger = Logger.getLogger(PersonDAOImpl.class);
+	private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 	
-	//this method is use to create the hibernate's SessionFactory Object
-	private static SessionFactory buildSessionFactory() {
-		//creating configuration instance & passing hibernate's configuration file
-		Configuration configObj = new Configuration();
-		configObj.configure("hibernate.cfg.xml");
-		
-		//since hibernate version 4.x ServiceRegistry is being used
-		ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(configObj.getProperties()).build(); 
-		 
-		//creating hibernate SessionFactory instance
-		sessionFactoryObj = configObj.buildSessionFactory(serviceRegistryObj);
-		
-		return sessionFactoryObj;
-	}
 	
 	//method 1 is to insert a new person into database
-	public void createPerson(String email, String userName, String password, String typeOfUser, String adminsId) {
-		Person person = null;
+	public void createPerson(Person person) {
 		
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			sessionObj.beginTransaction();
 			
 			//create transaction entities
-			person = new Person();
-			person.setEmail(email);
-			person.setUserName(userName);
-			person.setPassword(password);
-			person.setTypeOfUser(typeOfUser);
-			person.setAdminsId(adminsId);
-			
-			sessionObj.save(person);
+			sessionObj.persist(person);
 			sessionObj.getTransaction().commit();
-			
-			logger.info("\nPerson created successfully!\n");
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
-				logger.info("\nTransaction is being rolled back...\n");
 				sessionObj.getTransaction().rollback();				
 			}
 		} finally {
@@ -76,15 +51,13 @@ public class PersonDAOImpl implements PersonDAO{
 		
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
-			personsList = (List<Person>) sessionObj.createCriteria(Person.class).list();
-			logger.info("The persons available");			
+			personsList = (List<Person>) sessionObj.createCriteria(Person.class).list();	
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
-				logger.info("Transaction is being rolled back...");
 				sessionObj.getTransaction().rollback();
 			}
 		} finally {
@@ -100,21 +73,20 @@ public class PersonDAOImpl implements PersonDAO{
 	    Person personObj = null;
 	    try {
 			//getting session object from session factory
-	    	sessionObj = buildSessionFactory().openSession();
+	    	sessionObj = this.sessionFactory.openSession();
 	    	//getting transaction object from session object
 	    	sessionObj.beginTransaction();
 	    	
 	    	personObj = (Person) sessionObj.get(Person.class, userName);
 	    	if(personObj != null) {
-	    		System.out.print("Username found!" + personObj.toString());
+	    		System.out.println("Username found!\n" + personObj.toString());
 	    	}else {
-	    		System.out.println("Student does not exists!");
+	    		System.out.println("Username does not exists!");
 	    	}	    	
 	    	sessionObj.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
-				logger.info("Transaction is being rolled back...");
 				sessionObj.getTransaction().rollback();
 			}
 		} finally {
@@ -129,7 +101,7 @@ public class PersonDAOImpl implements PersonDAO{
 		
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
 			
@@ -141,11 +113,9 @@ public class PersonDAOImpl implements PersonDAO{
 				
 			//commiting the transactions to the database
 			sessionObj.getTransaction().commit();
-			logger.info("\nPerson with id " + id + " is successfully updated.");
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
-				logger.info("The transaction is being rolled back...");
 				sessionObj.getTransaction().rollback();
 			}
 		} finally {
@@ -159,7 +129,7 @@ public class PersonDAOImpl implements PersonDAO{
 	public void deletePerson(String userName) {
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
 			
@@ -168,10 +138,9 @@ public class PersonDAOImpl implements PersonDAO{
 			
 			// Committing The Transactions To The Database
             sessionObj.getTransaction().commit();
-            logger.info("\nStudent With Id?= " + userName + " Is Successfully Deleted From The Database!\n");
+           
         } catch(Exception sqlException) {
-            if(sessionObj.getTransaction() != null) {
-                logger.info("\n.......Transaction Is Being Rolled Back.......\n");
+            if(sessionObj.getTransaction() != null) {                
                 sessionObj.getTransaction().rollback();
             }
             sqlException.printStackTrace();
@@ -187,14 +156,13 @@ public class PersonDAOImpl implements PersonDAO{
         Person findPersonObj = null;
         try {
             // Getting Session Object From SessionFactory
-            sessionObj = buildSessionFactory().openSession();
+            sessionObj = this.sessionFactory.openSession();
             // Getting Transaction Object From Session Object
             sessionObj.beginTransaction();
            
             findPersonObj = (Person) sessionObj.load(Person.class, personsUsername);
         } catch(Exception sqlException) {
-            if(sessionObj.getTransaction() != null) {
-                logger.info("\nTransaction Is Being Rolled Back...\n");
+            if(sessionObj.getTransaction() != null) {         
                 sessionObj.getTransaction().rollback();
             }
             sqlException.printStackTrace();

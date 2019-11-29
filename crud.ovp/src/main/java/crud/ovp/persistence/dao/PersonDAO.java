@@ -6,7 +6,7 @@ import crud.ovp.persistence.model.Person;
 
 public interface PersonDAO {
 
-	void createPerson(String email, String userName, String password, String typeOfUser, String adminsId);
+	void createPerson(Person person);
 	void updatePerson(int id, String email, String userName, String password, String adminsId);
 	void deletePerson(String userName);
 	Person findByPersonUsername(String personsUsername);

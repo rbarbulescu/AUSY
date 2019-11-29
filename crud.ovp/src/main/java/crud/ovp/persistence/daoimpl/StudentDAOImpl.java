@@ -2,13 +2,9 @@ package crud.ovp.persistence.daoimpl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 import crud.ovp.persistence.dao.StudentDAO;
 import crud.ovp.persistence.model.Student;
@@ -18,52 +14,28 @@ public class StudentDAOImpl implements StudentDAO{
 	static Session sessionObj;
 	static SessionFactory sessionFactoryObj;
 	
-	public final static Logger logger = Logger.getLogger(StudentDAOImpl.class);
-	
-	//this method is use to create the hibernate's SessionFactory Object
-	private static SessionFactory buildSessionFactory() {
-		//creating configuration instance & passing hibernate's configuration file
-		Configuration configObj = new Configuration();
-		configObj.configure("hibernate.cfg.xml");
-		
-		//since hibernate version 4.x ServiceRegistry is being used
-		ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(configObj.getProperties()).build(); 
-		 
-		//creating hibernate SessionFactory instance
-		sessionFactoryObj = configObj.buildSessionFactory(serviceRegistryObj);
-		
-		return sessionFactoryObj;
-	}
+	private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 	
 	//method 1 is to insert a new student into database
-	public void createStudent(String firstName, String lastName, String phone, String address, String CNP, String birthday, int trips, String personsId) {
-		Student student = null;
+	public void createStudent(Student student) {
 		
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			sessionObj.beginTransaction();
 			
-			//create transaction entities
-			student = new Student();
-			student.setFirstName(firstName);
-			student.setLastName(lastName);
-			student.setPhone(phone);
-			student.setAddress(address);
-			student.setCNP(CNP);
-			student.setBirthday(birthday);
-			student.setTrips(trips);
-			student.setPersonsId(personsId);
-			
-			sessionObj.save(student);
+			//create transaction entities			
+			sessionObj.persist(student);
 			sessionObj.getTransaction().commit();
 			
-			logger.info("\nStudent created successfully!\n");
-			
+					
 		} catch (Exception e) {
 			// TODO: handle exception
-			if(sessionObj.getTransaction() != null) {
-				logger.info("\nTransaction is being rolled back...\n");
+			if(sessionObj.getTransaction() != null) {				
 				sessionObj.getTransaction().rollback();				
 			}
 		} finally {
@@ -80,15 +52,13 @@ public class StudentDAOImpl implements StudentDAO{
 		
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
-			studentList = (List<Student>) sessionObj.createCriteria(Student.class).list();
-			logger.info("The students available");			
+			studentList = (List<Student>) sessionObj.createCriteria(Student.class).list();				
 		} catch (Exception e) {
 			// TODO: handle exception
-			if(sessionObj.getTransaction() != null) {
-				logger.info("Transaction is being rolled back...");
+			if(sessionObj.getTransaction() != null) {				
 				sessionObj.getTransaction().rollback();
 			}
 		} finally {
@@ -104,22 +74,21 @@ public class StudentDAOImpl implements StudentDAO{
 	    Student stdObj = null;
 	    try {
 			//getting session object from session factory
-	    	sessionObj = buildSessionFactory().openSession();
+	    	sessionObj = this.sessionFactory.openSession();
 	    	//getting transaction object from session object
 	    	sessionObj.beginTransaction();
 	    	
 	    	stdObj = (Student) sessionObj.get(Student.class, CNP);
 
 	    	if(stdObj != null) {
-	    		System.out.print("Student found!" + stdObj.toString());
+	    		System.out.println("Student found!\n" + stdObj.toString());
 	    	}else {
 	    		System.out.println("Student does not exists!");
 	    	}
 	    	sessionObj.getTransaction().commit();	    	
 		} catch (Exception e) {
 			// TODO: handle exception
-			if(sessionObj.getTransaction() != null) {
-				logger.info("Transaction is being rolled back...");
+			if(sessionObj.getTransaction() != null) {				
 				sessionObj.getTransaction().rollback();
 			}
 		} finally {
@@ -134,7 +103,7 @@ public class StudentDAOImpl implements StudentDAO{
 		
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
 			
@@ -150,11 +119,9 @@ public class StudentDAOImpl implements StudentDAO{
 			
 			//commiting the transactions to the database
 			sessionObj.getTransaction().commit();
-			logger.info("\nAdmin with id " + CNP + " is successfully updated.");
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
-				logger.info("The transaction is being rolled back...");
 				sessionObj.getTransaction().rollback();
 			}
 		} finally {
@@ -168,7 +135,7 @@ public class StudentDAOImpl implements StudentDAO{
 	public void deleteStudent(String CNP) {
 		try {
 			//getting session object from session factory
-			sessionObj = buildSessionFactory().openSession();
+			sessionObj = this.sessionFactory.openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
 			
@@ -177,10 +144,8 @@ public class StudentDAOImpl implements StudentDAO{
 			
 			// Committing The Transactions To The Database
             sessionObj.getTransaction().commit();
-            logger.info("\nStudent With Id?= " + CNP + " Is Successfully Deleted From The Database!\n");
         } catch(Exception sqlException) {
             if(sessionObj.getTransaction() != null) {
-                logger.info("\n.......Transaction Is Being Rolled Back.......\n");
                 sessionObj.getTransaction().rollback();
             }
             sqlException.printStackTrace();
@@ -196,14 +161,13 @@ public class StudentDAOImpl implements StudentDAO{
         Student findStudentObj = null;
         try {
             // Getting Session Object From SessionFactory
-            sessionObj = buildSessionFactory().openSession();
+            sessionObj = this.sessionFactory.openSession();
             // Getting Transaction Object From Session Object
             sessionObj.beginTransaction();
  
             findStudentObj = (Student) sessionObj.load(Student.class, find_studentCNP);
         } catch(Exception sqlException) {
             if(sessionObj.getTransaction() != null) {
-                logger.info("\nTransaction Is Being Rolled Back...\n");
                 sessionObj.getTransaction().rollback();
             }
             sqlException.printStackTrace();
@@ -215,7 +179,7 @@ public class StudentDAOImpl implements StudentDAO{
     public void deleteAllStudents() {
         try {
             // Getting Session Object From SessionFactory
-            sessionObj = buildSessionFactory().openSession();
+            sessionObj = this.sessionFactory.openSession();
             // Getting Transaction Object From Session Object
             sessionObj.beginTransaction();
  
@@ -224,10 +188,8 @@ public class StudentDAOImpl implements StudentDAO{
              
             // Committing The Transactions To The Database
             sessionObj.getTransaction().commit();
-            logger.info("\nSuccessfully Deleted All Records From The Database Table!\n");
         } catch(Exception sqlException) {
             if(null != sessionObj.getTransaction()) {
-                logger.info("\nTransaction Is Being Rolled Back...\n");
                 sessionObj.getTransaction().rollback();
             }
             sqlException.printStackTrace();

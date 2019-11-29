@@ -6,10 +6,11 @@ import crud.ovp.persistence.model.Admin;
 
 public interface AdminDAO {
 	
-	void createAdmin(String adminId, String institution);
+	void createAdmin(Admin admin);
 	void updateAdmin(String adminId, String institution);
 	void deleteAdmin(String adminId);
 	Admin findByAdminId(String find_adminId);
 	List<Admin> displayAdmins(); 
+	void checkAdminId(String adminId);
 
 }
