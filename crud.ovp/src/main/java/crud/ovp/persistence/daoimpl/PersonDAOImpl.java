@@ -69,7 +69,7 @@ public class PersonDAOImpl implements PersonDAO{
 	}
 	
 	//check if a username exists in the database
-	public void checkUserName(String userName) {
+	public Person checkUserName(String userName) {
 	    Person personObj = null;
 	    try {
 			//getting session object from session factory
@@ -94,6 +94,7 @@ public class PersonDAOImpl implements PersonDAO{
 				sessionObj.close();
 			}
 		}
+	    return personObj;
     }
 	
 	//method 3 is used to update a person in the database table
@@ -106,7 +107,7 @@ public class PersonDAOImpl implements PersonDAO{
 			sessionObj.beginTransaction();
 			
 			//creating transaction entity
-			Person personObj = (Person) sessionObj.get(Person.class, id);
+			Person personObj = (Person) sessionObj.get(Person.class, userName);
 			personObj.setEmail(email);
 			personObj.setUserName(userName);
 			personObj.setPassword(password);

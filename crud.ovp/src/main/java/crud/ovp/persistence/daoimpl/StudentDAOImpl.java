@@ -70,7 +70,7 @@ public class StudentDAOImpl implements StudentDAO{
 	}
 	
 	//Select a student using his CNP
-	public void selectStudentByCNP(String CNP) {
+	public Student checkStudentByCNP(String CNP) {
 	    Student stdObj = null;
 	    try {
 			//getting session object from session factory
@@ -96,6 +96,7 @@ public class StudentDAOImpl implements StudentDAO{
 				sessionObj.close();
 			}
 		}
+	    return stdObj;
     }
 		
 	//method 3 is used to update a student in the database table

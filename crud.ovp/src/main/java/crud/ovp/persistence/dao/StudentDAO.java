@@ -12,6 +12,6 @@ public interface StudentDAO {
 	Student findByStudentCNP(String find_studentCNP);
 	void deleteAllStudents();
 	List<Student> displayStudents();
-	void selectStudentByCNP(String CNP);
+	Student checkStudentByCNP(String CNP);
 	
 }

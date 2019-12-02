@@ -51,7 +51,7 @@ public class AdminController {
 	@DELETE
 	@Path("/{adminId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void deleteCountry(@PathParam("adminId") String adminId) {
+	public void deleteAdmin(@PathParam("adminId") String adminId) {
 		adminDAO.deleteAdmin(adminId);
 	}
 }

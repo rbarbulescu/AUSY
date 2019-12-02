@@ -11,6 +11,6 @@ public interface PersonDAO {
 	void deletePerson(String userName);
 	Person findByPersonUsername(String personsUsername);
 	List<Person> displayPersons();
-	void checkUserName(String userName);
+	Person checkUserName(String userName);
 	
 }
