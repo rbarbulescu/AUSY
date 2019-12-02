@@ -80,10 +80,11 @@ public class AdminDAOImpl implements AdminDAO{
 			//creating transaction entity
 			Admin adminObj = findByAdminId(adminId);
 			
-			if(adminObj.getAdminId() == null) {
-				adm.setAdminId(adminId);
-				adm.setInstitution(institution);
-				createAdmin(adm);
+			if(adminObj == null) {
+				Admin admin = new Admin();				
+				admin.setAdminId(adminId);
+				admin.setInstitution(institution);
+				createAdmin(admin);
 			} else {
 				adminObj.setInstitution(institution);				
 			}

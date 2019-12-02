@@ -98,7 +98,7 @@ public class PersonDAOImpl implements PersonDAO{
     }
 	
 	//method 3 is used to update a person in the database table
-	public void updatePerson(int id, String email, String userName, String password, String adminsId) {
+	public void updatePerson(String email, String userName, String password, String adminsId, String typeOfUser) {
 		
 		try {
 			//getting session object from session factory
@@ -108,10 +108,20 @@ public class PersonDAOImpl implements PersonDAO{
 			
 			//creating transaction entity
 			Person personObj = (Person) sessionObj.get(Person.class, userName);
-			personObj.setEmail(email);
-			personObj.setUserName(userName);
-			personObj.setPassword(password);
-				
+			if(personObj == null) {
+				Person person = new Person();							
+				person.setAdminsId(adminsId);
+				person.setEmail(email);
+				person.setPassword(password);
+				person.setTypeOfUser(typeOfUser);
+				person.setUserName(userName);
+				createPerson(person);
+			} else {
+				personObj.setTypeOfUser(typeOfUser);
+				personObj.setEmail(email);
+				personObj.setPassword(password);
+				personObj.setAdminsId(adminsId);
+			}	
 			//commiting the transactions to the database
 			sessionObj.getTransaction().commit();
 		} catch (Exception e) {

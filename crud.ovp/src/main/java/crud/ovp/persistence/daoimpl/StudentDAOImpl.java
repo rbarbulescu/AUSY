@@ -100,7 +100,7 @@ public class StudentDAOImpl implements StudentDAO{
     }
 		
 	//method 3 is used to update a student in the database table
-	public void updateStudent(String firstName, String lastName, String phone, String address, String CNP, String birthday, int trips, String personsID) {
+	public void updateStudent(String firstName, String lastName, String phone, String address, String CNP, String birthday, int trips, String personsId) {
 		
 		try {
 			//getting session object from session factory
@@ -110,13 +110,29 @@ public class StudentDAOImpl implements StudentDAO{
 			
 			//creating transaction entity
 			Student studentObj = (Student) sessionObj.get(Student.class, CNP);
-			studentObj.setFirstName(firstName);
-			studentObj.setLastName(lastName);
-			studentObj.setPhone(phone);
-			studentObj.setAddress(address);
-			studentObj.setBirthday(birthday);
-			studentObj.setTrips(trips);
-			studentObj.setPersonsId(personsID);
+			
+			if(studentObj == null) {
+				Student student = new Student();
+				student.setFirstName(firstName);
+				student.setLastName(lastName);
+				student.setPhone(phone);
+				student.setAddress(address);
+				student.setCNP(CNP);
+				student.setBirthday(birthday);
+				student.setTrips(trips);
+				student.setPersonsId(personsId);
+				
+				createStudent(student);
+			} else {
+				studentObj.setFirstName(firstName);
+				studentObj.setLastName(lastName);
+				studentObj.setPhone(phone);
+				studentObj.setAddress(address);
+				studentObj.setBirthday(birthday);
+				studentObj.setTrips(trips);
+				studentObj.setPersonsId(personsId);
+			}
+			
 			
 			//commiting the transactions to the database
 			sessionObj.getTransaction().commit();

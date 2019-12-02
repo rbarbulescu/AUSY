@@ -45,7 +45,7 @@ public class PersonController {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	public void updatePerson(Person person) {
-		personDAO.updatePerson(person.getId(), person.getEmail(), person.getUserName(), person.getPassword(), person.getAdminsId());
+		personDAO.updatePerson(person.getEmail(), person.getUserName(), person.getPassword(), person.getAdminsId(), person.getTypeOfUser());
 	}
 
 	@DELETE
