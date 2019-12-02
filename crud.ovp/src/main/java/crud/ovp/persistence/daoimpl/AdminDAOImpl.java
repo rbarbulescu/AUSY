@@ -70,21 +70,31 @@ public class AdminDAOImpl implements AdminDAO{
 	
 	//method 3 is used to update a record in the database table
 	public void updateAdmin(String adminId, String institution) {
-		
+		Admin adm = new Admin();
 		try {
 			//getting session object from session factory
 			sessionObj = this.sessionFactory.openSession();
 			//getting transaction object from session object
 			sessionObj.beginTransaction();
-			
+
 			//creating transaction entity
-			Admin adminObj = (Admin) sessionObj.get(Admin.class, adminId);
-			adminObj.setInstitution(institution);
+			Admin adminObj = findByAdminId(adminId);
+			
+			if(adminObj.getAdminId() == null) {
+				adm.setAdminId(adminId);
+				adm.setInstitution(institution);
+				createAdmin(adm);
+			} else {
+				adminObj.setInstitution(institution);				
+			}
 			
 			//commiting the transactions to the database
 			sessionObj.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
+			adm.setAdminId(adminId);
+			adm.setInstitution(institution);
+			createAdmin(adm);
 			if(sessionObj.getTransaction() != null) {
 				sessionObj.getTransaction().rollback();
 			}

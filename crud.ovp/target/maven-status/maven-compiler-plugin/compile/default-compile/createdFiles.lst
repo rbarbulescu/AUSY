@@ -6,5 +6,6 @@ crud\ovp\persistence\dao\StudentDAO.class
 crud\ovp\persistence\daoimpl\PersonDAOImpl.class
 crud\ovp\AppMain.class
 crud\ovp\persistence\model\Person.class
+crud\ovp\controller\AdminController.class
 crud\ovp\persistence\model\Student.class
 crud\ovp\persistence\dao\PersonDAO.class

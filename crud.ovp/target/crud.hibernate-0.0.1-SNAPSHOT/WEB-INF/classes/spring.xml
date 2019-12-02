@@ -25,6 +25,8 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>crud.ovp.persistence.model.Admin</value>
+				<value>crud.ovp.persistence.model.Person</value>
+				<value>crud.ovp.persistence.model.Student</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

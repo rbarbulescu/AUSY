@@ -68,6 +68,7 @@ public class AppMain {
 		for(Student s : resultStudents) {
 			System.out.println(s);
 		}
+		System.out.println(adminDAO.findByAdminId("222"));
 				
 		context.close();
 		
