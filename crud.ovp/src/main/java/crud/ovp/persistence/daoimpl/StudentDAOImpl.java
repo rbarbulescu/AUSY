@@ -112,17 +112,19 @@ public class StudentDAOImpl implements StudentDAO{
 			Student studentObj = (Student) sessionObj.get(Student.class, CNP);
 			
 			if(studentObj == null) {
-				Student student = new Student();
-				student.setFirstName(firstName);
-				student.setLastName(lastName);
-				student.setPhone(phone);
-				student.setAddress(address);
-				student.setCNP(CNP);
-				student.setBirthday(birthday);
-				student.setTrips(trips);
-				student.setPersonsId(personsId);
+//				Student student = new Student();
+//				student.setFirstName(firstName);
+//				student.setLastName(lastName);
+//				student.setPhone(phone);
+//				student.setAddress(address);
+//				student.setCNP(CNP);
+//				student.setBirthday(birthday);
+//				student.setTrips(trips);
+//				student.setPersonsId(personsId);
+//				
+//				createStudent(student);
 				
-				createStudent(student);
+				System.out.println("Student does not exist!");
 			} else {
 				studentObj.setFirstName(firstName);
 				studentObj.setLastName(lastName);

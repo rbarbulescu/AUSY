@@ -11,6 +11,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import crud.ovp.persistence.dao.PersonDAO;
@@ -33,7 +35,20 @@ public class PersonController {
 	@Path("/{userName}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Person findPerson(@PathParam("userName") String userName) {
-		return personDAO.checkUserName(userName);
+		return personDAO.findByPersonUsername(userName);
+	}
+	
+	@POST
+	@Path("/login")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Person login(String jsonObj) throws JSONException {
+		//you could also use @QueryParam to take the parameter from the user
+		JSONObject json = new JSONObject(jsonObj);
+		String userName = json.getString("userName");
+		String password = json.getString("password");		
+		System.out.println("userName: " + userName + "\npassword: " + password);
+		
+		return personDAO.checkUser(userName, password);
 	}
 
 	@POST
@@ -49,10 +64,10 @@ public class PersonController {
 	}
 
 	@DELETE
-	@Path("/{personId}")
+	@Path("/{userName}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void deletePerson(@PathParam("personId") String personId) {
-		personDAO.deletePerson(personId); 
+	public void deletePerson(@PathParam("userName") String userName) {
+		personDAO.deletePerson(userName); 
 	}
 
 }

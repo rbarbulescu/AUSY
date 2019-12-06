@@ -11,6 +11,6 @@ public interface AdminDAO {
 	void deleteAdmin(String adminId);
 	Admin findByAdminId(String find_adminId);
 	List<Admin> displayAdmins(); 
-	void checkAdminId(String adminId);
+	void checkAdminId(String adminId, String institution);
 
 }

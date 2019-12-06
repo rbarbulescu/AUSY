@@ -29,8 +29,7 @@ public class AdminDAOImpl implements AdminDAO{
 			//create transaction entities
 			sessionObj.persist(admin);
 			sessionObj.getTransaction().commit();
-			
-			
+					
 		} catch (Exception e) {
 			// TODO: handle exception
 			if(sessionObj.getTransaction() != null) {
@@ -70,7 +69,7 @@ public class AdminDAOImpl implements AdminDAO{
 	
 	//method 3 is used to update a record in the database table
 	public void updateAdmin(String adminId, String institution) {
-		Admin adm = new Admin();
+	
 		try {
 			//getting session object from session factory
 			sessionObj = this.sessionFactory.openSession();
@@ -78,13 +77,15 @@ public class AdminDAOImpl implements AdminDAO{
 			sessionObj.beginTransaction();
 
 			//creating transaction entity
-			Admin adminObj = findByAdminId(adminId);
+			Admin adminObj = (Admin) sessionObj.get(Admin.class, adminId);
 			
 			if(adminObj == null) {
-				Admin admin = new Admin();				
-				admin.setAdminId(adminId);
-				admin.setInstitution(institution);
-				createAdmin(admin);
+//				Admin admin = new Admin();				
+//				admin.setAdminId(adminId);
+//				admin.setInstitution(institution);
+//				createAdmin(admin);
+				
+				System.out.println("Admin does not exist!");
 			} else {
 				adminObj.setInstitution(institution);				
 			}
@@ -93,9 +94,6 @@ public class AdminDAOImpl implements AdminDAO{
 			sessionObj.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: handle exception
-			adm.setAdminId(adminId);
-			adm.setInstitution(institution);
-			createAdmin(adm);
 			if(sessionObj.getTransaction() != null) {
 				sessionObj.getTransaction().rollback();
 			}
@@ -131,7 +129,7 @@ public class AdminDAOImpl implements AdminDAO{
         }
 	}
 	
-	public Admin findByAdminId(String find_adminId) {
+	public Admin findByAdminId(String adminId) {
         Admin findAdminObj = null;
         try {
             // Getting Session Object From SessionFactory
@@ -139,7 +137,7 @@ public class AdminDAOImpl implements AdminDAO{
             // Getting Transaction Object From Session Object
             sessionObj.beginTransaction();
  
-            findAdminObj = (Admin) sessionObj.load(Admin.class, find_adminId);
+            findAdminObj = (Admin) sessionObj.load(Admin.class, adminId);
         } catch(Exception sqlException) {
             if(sessionObj.getTransaction() != null) {
                 sessionObj.getTransaction().rollback();
@@ -150,32 +148,36 @@ public class AdminDAOImpl implements AdminDAO{
     }
 	
 	//check if an admin exists in the database
-		public void checkAdminId(String adminId) {
-		    Admin adminObj = null;
-		    
-		    try {
-				//getting session object from session factory
-		    	sessionObj = this.sessionFactory.openSession();
-		    	//getting transaction object from session object
-		    	sessionObj.beginTransaction();
-		    	
-		    	adminObj = (Admin) sessionObj.get(Admin.class, adminId);
-		    	if(adminObj != null) {
-		    		System.out.println("Admin found!\n" + adminObj.toString());
-		    	}else {
-		    		System.out.println("Admin does not exists!");
-		    	}	    	
-		    	sessionObj.getTransaction().commit();
-			} catch (Exception e) {
-				// TODO: handle exception
-				if(sessionObj.getTransaction() != null) {
-					sessionObj.getTransaction().rollback();
-				}
-			} finally {
-				if(sessionObj != null) {
-					sessionObj.close();
-				}
+	public void checkAdminId(String adminId, String institution) {
+	    
+	    
+	    try {
+			//getting session object from session factory
+	    	sessionObj = this.sessionFactory.openSession();
+	    	//getting transaction object from session object
+	    	sessionObj.beginTransaction();
+	    	Admin adminObj = null;	    	
+	    	adminObj = (Admin) sessionObj.get(Admin.class, adminId);
+	    	if(adminObj != null) {
+	    		System.out.println("Admin found!\n" + adminObj.toString());
+	    	}else {
+	    		Admin admin = new Admin();
+	    		admin.setAdminId(adminId);
+	    		admin.setInstitution(institution);
+	    		
+	    		createAdmin(admin);
+	    	}	    	
+	    	sessionObj.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			if(sessionObj.getTransaction() != null) {
+				sessionObj.getTransaction().rollback();
 			}
-	    }
+		} finally {
+			if(sessionObj != null) {
+				sessionObj.close();
+			}
+		}
+    }
 	
 }
