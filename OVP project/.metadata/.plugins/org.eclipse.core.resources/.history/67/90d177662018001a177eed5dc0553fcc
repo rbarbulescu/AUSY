@@ -1,0 +1,8 @@
+package ovp.backend.persistence.model;
+
+
+@Entity
+@Table(name="user_type")
+public class User_Type {
+
+}

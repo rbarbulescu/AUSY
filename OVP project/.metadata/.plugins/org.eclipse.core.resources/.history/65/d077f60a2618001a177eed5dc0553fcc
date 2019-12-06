@@ -1,0 +1,41 @@
+package ovp.backend.persistence.daoimpl;
+
+import java.util.List;
+
+import ovp.backend.persistence.dao.UserTypeDAO;
+import ovp.backend.persistence.model.User;
+import ovp.backend.persistence.model.UserType;
+
+public class UserTypeDAOImpl implements UserTypeDAO{
+
+	@Override
+	public void createUserType(UserType userType) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateUser(String userName, String password) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteUser(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public User findUserTypeByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserType> displayUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

@@ -1,0 +1,79 @@
+package ovp.backend.persistence.daoimpl;
+
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import ovp.backend.persistence.dao.UserDAO;
+import ovp.backend.persistence.model.User;
+
+public class UserDAOImpl implements UserDAO {
+	
+	static Session sessionObj;
+
+	private SessionFactory sessionFactory;
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
+	public void createUser(User user) {
+		try {
+			//getting session object from session factory
+			sessionObj = this.sessionFactory.openSession();
+			sessionObj.beginTransaction();
+			
+			//create transaction entities
+			sessionObj.persist(user);
+			sessionObj.getTransaction().commit();
+					
+		} catch (Exception e) {
+			// TODO: handle exception
+			if(sessionObj.getTransaction() != null) {
+				sessionObj.getTransaction().rollback();				
+			}
+		} finally {
+			if(sessionObj != null) {
+				sessionObj.close();
+			}
+		}
+	}
+	
+	public void updateUser(String userName, String password) {
+		
+	}
+	
+	public void deleteUser(String userName) {
+		
+	}
+	
+	public void loginCheck(String userName, String password) {
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<User> displayUser() {
+		
+		List<User> usersList = null;
+		
+		try {
+			//getting session object from session factory
+			sessionObj = this.sessionFactory.openSession();
+			//getting transaction object from session object
+			sessionObj.beginTransaction();
+			usersList = (List<User>) sessionObj.createCriteria(User.class).list();
+		} catch (Exception e) {
+			// TODO: handle exception
+			if(sessionObj.getTransaction() != null) {
+				sessionObj.getTransaction().rollback();
+			}
+		} finally {
+			if(sessionObj != null) {
+				sessionObj.close();
+			}
+		}
+		return usersList;
+	}
+	
+}

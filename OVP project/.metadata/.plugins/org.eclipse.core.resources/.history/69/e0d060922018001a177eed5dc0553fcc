@@ -1,0 +1,15 @@
+package ovp.backend.persistence.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="user_type")
+public class User_Type {
+
+	private int userId;
+	
+	@Column(name="userType")
+	private String userType;
+	
+}

@@ -1,0 +1,22 @@
+package ovp.backend.persistence.daoimpl;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import ovp.backend.persistence.dao.UserDAO;
+
+public class UserDAOImpl implements UserDAO {
+	
+	static Session sessionObj;
+
+	private SessionFactory sessionFactory;
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
+	public void createUser() {
+		
+	}
+	
+}

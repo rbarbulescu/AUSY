@@ -1,0 +1,10 @@
+package ovp.backend.persistence.dao;
+
+public interface UserDAO {
+
+	void createUser(User user);
+	void updateUser(String userName, String password);
+	void deleteUser(String userName);
+	void checkUser(String userName, String password);
+	
+}

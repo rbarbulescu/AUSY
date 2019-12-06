@@ -1,0 +1,24 @@
+package ovp.backend.persistence.model;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="user_type")
+public class User_Type {
+
+	@Id
+	@Column(name="userId")
+	private int userId;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="userId", referencedColumnName="id")
+	@Column(name="userType")
+	private String userType;
+	
+}

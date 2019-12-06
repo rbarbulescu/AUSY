@@ -1,0 +1,13 @@
+package ovp.backend.persistence.dao;
+
+import ovp.backend.persistence.model.User;
+
+public interface UserDAO {
+
+	void createUser(User user);
+	void updateUser(String userName, String password);
+	void deleteUser(String userName);
+	void checkUser(String userName, String password);
+	List<User> displayUsers();
+	
+}
