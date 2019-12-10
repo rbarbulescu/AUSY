@@ -1,0 +1,20 @@
+package ovp.frontend;
+
+import com.sun.jersey.api.client.Client;
+
+public class AppMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {	
+			Client client = Client.create();
+			
+			WebResource webResource = client.resource("http://localhost:8080/ovp.backend-0.0.1-SNAPSHOT/rest/users");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+}

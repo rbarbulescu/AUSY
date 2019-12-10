@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;ovp.frontend&apos;" deleteContents="true" description="Delete resource &apos;ovp.frontend&apos;" element1="/ovp.frontend" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1575972221740"/>
+</session>

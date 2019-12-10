@@ -1,0 +1,8 @@
+package ovp.backend.persistence.model;
+
+public class UserType {
+	
+	private int id;
+	private String userType;
+
+}

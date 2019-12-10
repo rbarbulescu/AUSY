@@ -3,6 +3,7 @@
     <node name="libprov">
       <node name="last-provider-used">
         <attribute name="1.1" value="jaxrs-no-op-library-provider"/>
+        <attribute name="2.0" value="jaxrs-no-op-library-provider"/>
       </node>
     </node>
   </facet>

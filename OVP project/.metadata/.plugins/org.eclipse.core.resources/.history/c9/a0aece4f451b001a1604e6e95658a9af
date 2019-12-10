@@ -1,0 +1,20 @@
+package ovp.backend.persistence.daoimpl;
+
+import ovp.backend.persistence.dao.UserTypeDAO;
+import ovp.backend.persistence.model.UserType;
+
+public class UserTypeDAOImpl implements UserTypeDAO {
+
+	@Override
+	public UserType displayUserTypes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createUserType() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

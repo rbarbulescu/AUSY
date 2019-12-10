@@ -5,23 +5,24 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="user_type")
 public class UserType {
-
+	
 	@Id
-	@Column(name="userId")
-	private int userId;
+	@Column(name="Id")
+	private int id;
 	
 	@Column(name="userType")
 	private String userType;
 
-	public int getUserId() {
-		return userId;
+	public int getId() {
+		return id;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getUserType() {
@@ -34,7 +35,7 @@ public class UserType {
 
 	@Override
 	public String toString() {
-		return "User_Type [userId=" + userId + ", userType=" + userType + "]";
+		return "UserType [id=" + id + ", userType=" + userType + "]";
 	}
-	
+
 }

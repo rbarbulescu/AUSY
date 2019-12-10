@@ -1,0 +1,32 @@
+package ovp.frontend;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+
+public class AppMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {	
+			Client client = Client.create();
+			WebResource webResource = client.resource("http://localhost:8080/ovp.backend-0.0.1-SNAPSHOT/rest/users/");
+			ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
+			
+			if(response.getStatus() != 200) {
+				throw new RuntimeException("Failed: Http error code : " + response.getStatus());
+			} else {
+				String output = response.getEntity(String.class);
+				
+				System.out.println("Output response...");
+				System.out.println(output);
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+}

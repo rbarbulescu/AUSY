@@ -16,13 +16,47 @@ import org.codehaus.jettison.json.JSONObject;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import ovp.backend.persistence.dao.UserDAO;
+import ovp.backend.persistence.dao.UserTypeDAO;
 import ovp.backend.persistence.model.User;
+import ovp.backend.persistence.model.UserType;
 
 @Path("/users")
 public class UserController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 	
 	UserDAO userDAO = context.getBean(UserDAO.class);
+	UserTypeDAO userTypeDAO = context.getBean(UserTypeDAO.class);
+	
+	@GET
+	@Path("/types")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<UserType> getTypes(){
+		return userTypeDAO.displayUserTypes();
+	}
+	
+	@POST
+	@Path("/type")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void createUserType(String json) {
+		
+		JSONObject jsonObj;
+		try {
+			jsonObj = new JSONObject(json);
+			int id = jsonObj.getInt("id");
+			String userType = jsonObj.getString("userType");
+
+			UserType type = new UserType();
+			type.setId(id);
+			type.setUserType(userType);
+						
+			userTypeDAO.createUserType(type);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+		
+	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -56,9 +90,11 @@ public class UserController {
 			user.setUserTypeId(userTypeId);
 						
 			userDAO.createUser(user);
+			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}		
 	}
 
@@ -74,9 +110,7 @@ public class UserController {
 			int userTypeId = jsonObj.getInt("userTypeId");
 			
 			userDAO.updatePassword(userName, oldPassword, newPassword, userTypeId);
-			
 
-			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

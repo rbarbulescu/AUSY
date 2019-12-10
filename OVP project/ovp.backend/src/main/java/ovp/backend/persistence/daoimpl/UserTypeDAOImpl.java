@@ -6,11 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import ovp.backend.persistence.dao.UserTypeDAO;
-import ovp.backend.persistence.model.User;
 import ovp.backend.persistence.model.UserType;
 
 public class UserTypeDAOImpl implements UserTypeDAO {
-
+	
 	static Session sessionObj;
 
 	private SessionFactory sessionFactory;
@@ -19,49 +18,17 @@ public class UserTypeDAOImpl implements UserTypeDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	@Override
-	public void createUserType(UserType userType) {
-		// TODO Auto-generated method stub
-		try {
-			// getting session object from session factory
-			sessionObj = this.sessionFactory.openSession();
-			sessionObj.beginTransaction();
+	@SuppressWarnings("unchecked")
+	public List<UserType> displayUserTypes() {
 
-			// create transaction entities
-			sessionObj.persist(userType);
-			sessionObj.getTransaction().commit();
-		} catch (Exception e) {
-			// TODO: handle exception
-			if (sessionObj.getTransaction() != null) {
-				sessionObj.getTransaction().rollback();
-			}
-		} finally {
-			if (sessionObj != null) {
-				sessionObj.close();
-			}
-		}
-	}
+		List<UserType> usersTypesList = null;
 
-	@Override
-	public void updateUserType(String userId, String userType) {
-		// TODO Auto-generated method stub
 		try {
 			// getting session object from session factory
 			sessionObj = this.sessionFactory.openSession();
 			// getting transaction object from session object
 			sessionObj.beginTransaction();
-
-			// creating transaction entity
-			User userObj = (User) sessionObj.get(User.class, userId);
-
-			if (userObj == null) {
-				System.out.println("Admin does not exist!");
-			} else {
-				userObj.setPassword(userType);
-			}
-
-			// commiting the transactions to the database
-			sessionObj.getTransaction().commit();
+			usersTypesList = (List<UserType>) sessionObj.createCriteria(UserType.class).list();
 		} catch (Exception e) {
 			// TODO: handle exception
 			if (sessionObj.getTransaction() != null) {
@@ -72,18 +39,30 @@ public class UserTypeDAOImpl implements UserTypeDAO {
 				sessionObj.close();
 			}
 		}
+		return usersTypesList;
 	}
 
-	@Override
-	public User findUserTypeByUserName(String userName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<UserType> displayUsers() {
-		// TODO Auto-generated method stub
-		return null;
+	public void createUserType(UserType type) {
+		
+		try {
+			// getting seesion from session factory
+			sessionObj = this.sessionFactory.openSession();
+			// getting transaction object from session object
+			sessionObj.beginTransaction();
+			
+			sessionObj.persist(type);
+			sessionObj.getTransaction().commit();	
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			if (sessionObj.getTransaction() != null) {
+				sessionObj.getTransaction().rollback();
+			}
+		} finally {
+			if (sessionObj != null) {
+				sessionObj.close();
+			}
+		}
 	}
 
 }

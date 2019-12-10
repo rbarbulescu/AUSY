@@ -1,0 +1,8 @@
+package ovp.backend.persistence.dao;
+
+public interface UserTypeDAO {
+	
+	UserType displayUserTypes();
+	
+
+}

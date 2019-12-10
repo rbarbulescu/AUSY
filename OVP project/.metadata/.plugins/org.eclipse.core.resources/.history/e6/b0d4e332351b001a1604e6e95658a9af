@@ -1,0 +1,17 @@
+package ovp.frontend;
+
+import com.sun.jersey.api.client.Client;
+
+public class AppMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			Client client = Clien.create();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+}

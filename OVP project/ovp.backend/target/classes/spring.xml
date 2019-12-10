@@ -24,6 +24,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>ovp.backend.persistence.model.User</value>
+				<value>ovp.backend.persistence.model.UserType</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -36,6 +37,10 @@
 	</bean>	
 	
 	<bean id="userDAO" class="ovp.backend.persistence.daoimpl.UserDAOImpl">
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</bean>
+	
+	<bean id="userTypeDAO" class="ovp.backend.persistence.daoimpl.UserTypeDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
 

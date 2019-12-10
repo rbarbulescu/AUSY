@@ -1,0 +1,84 @@
+package ovp.frontend;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+
+public class AppMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		getUser("username1");
+		getUsers();
+		createUser("username10", "email10@gmail.com", "password10", 3);
+	}
+	
+	public static void getUsers() {
+		try {	
+			Client client = Client.create();
+			WebResource webResource = client.resource("http://localhost:8080/ovp.backend-0.0.1-SNAPSHOT/rest/users/");
+			ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
+			
+			if(response.getStatus() != 200) {
+				throw new RuntimeException("Failed: Http error code : " + response.getStatus());
+			} else {
+				String output = response.getEntity(String.class);
+				
+				System.out.println("Getting users...");
+				System.out.println(output);
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	public static void getUser(String userName) {
+		try {	
+			Client client = Client.create();
+			WebResource webResource = client.resource("http://localhost:8080/ovp.backend-0.0.1-SNAPSHOT/rest/users/" + userName);
+			ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
+			
+			if(response.getStatus() != 200) {
+				throw new RuntimeException("Failed: Http error code : " + response.getStatus());
+			} else {
+				String output = response.getEntity(String.class);
+				
+				System.out.println("Getting user...");
+				System.out.println(output);
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	public static void createUser (String userName, String email, String password, int userTypeId) {
+		try {
+			Client client = Client.create();
+			WebResource webResource = client.resource("http://localhost:8080/ovp.backend-0.0.1-SNAPSHOT/rest/users/");
+			
+			String input = "{"
+					+ "email:" + email
+					+ "userName:" + userName
+					+ "password:" + password
+					+ "userTypeId:" + userTypeId
+					+ "}";
+			
+			ClientResponse response = webResource.type("applicatio/json").post(ClientResponse.class, input);
+			
+			if(response.getStatus() != 201) {
+				throw new RuntimeException("Failed: HTTP error code: " + response.getStatus());
+			} else {
+				System.out.println("Use was inserted to database...");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

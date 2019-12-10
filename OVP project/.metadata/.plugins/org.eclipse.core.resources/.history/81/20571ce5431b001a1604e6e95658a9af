@@ -1,0 +1,10 @@
+package ovp.backend.persistence.dao;
+
+import ovp.backend.persistence.model.UserType;
+
+public interface UserTypeDAO {
+	
+	UserType displayUserTypes();
+	
+
+}

@@ -6,3 +6,15 @@
 0:0:0:0:0:0:0:1 - - [10/Dec/2019:11:01:09 +0200] "POST /ovp.backend/rest/users/login HTTP/1.1" 204 -
 0:0:0:0:0:0:0:1 - - [10/Dec/2019:11:01:15 +0200] "POST /ovp.backend/rest/users/login HTTP/1.1" 200 106
 0:0:0:0:0:0:0:1 - - [10/Dec/2019:11:02:26 +0200] "POST /ovp.backend/rest/users HTTP/1.1" 204 -
+127.0.0.1 - - [10/Dec/2019:14:34:35 +0200] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [10/Dec/2019:14:35:24 +0200] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [10/Dec/2019:14:35:24 +0200] "GET /ovp.backend/ HTTP/1.1" 404 975
+0:0:0:0:0:0:0:1 - - [10/Dec/2019:14:35:32 +0200] "GET /ovp.backend/rest/users HTTP/1.1" 200 497
+0:0:0:0:0:0:0:1 - - [10/Dec/2019:14:35:40 +0200] "GET /ovp.backend/rest/users/types HTTP/1.1" 200 12
+127.0.0.1 - - [10/Dec/2019:14:36:44 +0200] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [10/Dec/2019:14:36:45 +0200] "GET /ovp.backend/ HTTP/1.1" 404 975
+0:0:0:0:0:0:0:1 - - [10/Dec/2019:14:36:50 +0200] "GET /ovp.backend/rest/users/types HTTP/1.1" 200 100
+0:0:0:0:0:0:0:1 - - [10/Dec/2019:14:37:20 +0200] "POST /ovp.backend/rest/users/type HTTP/1.1" 204 -
+0:0:0:0:0:0:0:1 - - [10/Dec/2019:14:37:34 +0200] "POST /ovp.backend/rest/users/type HTTP/1.1" 204 -
+127.0.0.1 - - [10/Dec/2019:14:44:32 +0200] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [10/Dec/2019:14:44:41 +0200] "POST /ovp.backend/rest/users/type HTTP/1.1" 204 -
