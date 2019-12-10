@@ -38,10 +38,6 @@
 	<bean id="userDAO" class="ovp.backend.persistence.daoimpl.UserDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
-	
-	<bean id="userTypeDAO" class="ovp.backend.persistence.daoimpl.UserTypeDAOImpl">
-		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
-	</bean>
 
 </beans>
 

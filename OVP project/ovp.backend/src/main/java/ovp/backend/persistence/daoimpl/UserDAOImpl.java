@@ -40,7 +40,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
-	public void updateUser(String userName, String password) {
+	public void updateUser(String email, String userName, String password, int userTypeId) {
 		try {
 			// getting session object from session factory
 			sessionObj = this.sessionFactory.openSession();
@@ -53,7 +53,9 @@ public class UserDAOImpl implements UserDAO {
 			if (userObj == null) {
 				System.out.println("Admin does not exist!");
 			} else {
+				userObj.setEmail(email);
 				userObj.setPassword(password);
+				userObj.setUserTypeId(userTypeId);
 			}
 
 			// commiting the transactions to the database
@@ -102,20 +104,21 @@ public class UserDAOImpl implements UserDAO {
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			findUserObj = (User) sessionObj.load(User.class, userName);
+			findUserObj = (User) sessionObj.get(User.class, userName);
+			
+			return findUserObj;
+			
 		} catch (Exception e) {
 			if (sessionObj.getTransaction() != null) {
 				sessionObj.getTransaction().rollback();
 			}
 			e.printStackTrace();
+			return null;
 		}
-
-		return findUserObj;
 	}
 
-	public User loginCheck(String userName, String password) {
+	public User loginCheck(String userName, String password, int userTypeId) {
 		User userObj = null;
-
 		try {
 			System.out.println("finding user");
 
@@ -149,12 +152,13 @@ public class UserDAOImpl implements UserDAO {
 			if (sessionObj.getTransaction() != null) {
 				sessionObj.getTransaction().rollback();
 			}
+			return null;
 		} finally {
 			if (sessionObj != null) {
 				sessionObj.close();
 			}
 		}
-		return userObj;
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -179,6 +183,26 @@ public class UserDAOImpl implements UserDAO {
 			}
 		}
 		return usersList;
+	}
+	
+	public void updatePassword(String userName, String oldPassword, String newPassword, int userTypeId) {
+		User check = loginCheck(userName, oldPassword, userTypeId);
+		//System.out.println("check password: " + check.getPassword() + " \nold password: " + oldPassword);
+		
+		try {
+			if(check != null) { 
+				if(check.getPassword().equals(oldPassword)) {
+					updateUser(check.getEmail(), userName, newPassword, check.getUserTypeId());
+				} else {
+					System.out.println("wrong old password");
+				}
+			} else {
+				System.out.println("username or password is wrong");
+			}		
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 }
