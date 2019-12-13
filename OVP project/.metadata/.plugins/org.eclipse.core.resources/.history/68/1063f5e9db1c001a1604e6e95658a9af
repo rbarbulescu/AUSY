@@ -1,0 +1,13 @@
+<p class = "lead">Users</p>
+
+
+
+<div class = "list-users">
+	<c:forEach items="${users}" var="user">
+		<a href = "#" class = "list-user-item">${user.name }</a>
+	</c:forEach>>
+
+	<a href = "#" class = "list-user-item">User 1</a>
+	<a href = "#" class = "list-user-item">User 2</a>
+	<a href = "#" class = "list-user-item">User 3</a>
+</div>

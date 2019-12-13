@@ -1,0 +1,14 @@
+package ovp.backend.dto;
+
+import java.io.Serializable;
+
+public class UserTypeDTO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6369342994934164608L;
+
+	
+	
+}

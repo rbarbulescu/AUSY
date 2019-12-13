@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\Users\rbarbulescu\Documents\OVP project\ovp.backend"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -13,6 +14,7 @@
 		</list>
 	</section>
 	<section name="MavenProjectWizardArchetypePage">
+		<item key="catalog" value="All Catalogs"/>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
 			<item value="[artifactId]-TRUNK"/>
@@ -43,12 +45,14 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
-			<item value="ovp.backend"/>
+			<item value="ovp.common"/>
+			<item value="ovp.frontend"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
-			<item value="ovp.backend"/>
+			<item value="ovp.common.resources"/>
+			<item value="ovp.frontend"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

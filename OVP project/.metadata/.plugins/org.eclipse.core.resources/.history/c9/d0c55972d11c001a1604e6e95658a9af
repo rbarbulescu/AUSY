@@ -1,0 +1,5 @@
+package ovp.frontend.services;
+
+public class User {
+
+}

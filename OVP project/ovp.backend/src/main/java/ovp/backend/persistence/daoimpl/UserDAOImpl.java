@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import ovp.backend.persistence.dao.UserDAO;
 import ovp.backend.persistence.model.User;
 
+@Repository("userDAO")
 public class UserDAOImpl implements UserDAO {
 
 	static Session sessionObj;

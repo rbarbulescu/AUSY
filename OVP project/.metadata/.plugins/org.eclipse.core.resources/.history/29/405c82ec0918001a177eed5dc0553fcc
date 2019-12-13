@@ -1,7 +1,0 @@
-package ovp.backend.persistence.daoimpl;
-
-import ovp.backend.persistence.dao.UserDAO;
-
-public class UserDAOImpl implements UserDAO{
-
-}

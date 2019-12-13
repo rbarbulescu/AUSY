@@ -1,0 +1,9 @@
+package ovp.backend.dto;
+
+import java.io.Serializable;
+
+public class UserTypeDTO implements Serializable{
+
+	
+	
+}

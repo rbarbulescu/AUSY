@@ -1,8 +1,10 @@
 ovp\backend\persistence\model\UserType.class
+ovp\backend\commons\AppMain.class
+ovp\backend\commons\dto\UserDTO.class
 ovp\backend\persistence\dao\UserTypeDAO.class
 ovp\backend\persistence\daoimpl\UserTypeDAOImpl.class
 ovp\backend\persistence\model\User.class
 ovp\backend\persistence\dao\UserDAO.class
-ovp\backend\AppMain.class
 ovp\backend\persistence\daoimpl\UserDAOImpl.class
 ovp\backend\controller\UserController.class
+ovp\backend\commons\dto\UserTypeDTO.class

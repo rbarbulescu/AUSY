@@ -1,0 +1,5 @@
+package ovp.backend.dto;
+
+public class User {
+
+}

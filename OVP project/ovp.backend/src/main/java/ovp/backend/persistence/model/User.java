@@ -28,8 +28,6 @@ public class User {
 	@Column(name = "password")
 	private String password;
 
-//	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "Id")
 	@Column(name = "userTypeId")
 	private int userTypeId;
 	

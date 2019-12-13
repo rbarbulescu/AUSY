@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<a href="users">Click</a>
+	
+	<table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Postcode</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <c:forEach var="per" items="${users}">
+                    <tr>
+                        <td><c:out value="${per.name.title}"/></td>
+                        <td><c:out value="${per.name.first}"/></td>
+                        <td><c:out value="${per.name.last}"/></td>
+                        <td><c:out value="${per.location.street}"/></td>
+                        <td><c:out value="${per.location.city}"/></td>
+                        <td><c:out value="${per.location.state}"/></td>
+                        <td><c:out value="${per.location.postcode}"/></td>
+                        <td><c:out value="${per.email}"/></td>
+                        <td><c:out value="${per.gender}"/></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+</body>
+</html>

@@ -1,0 +1,11 @@
+package ovp.frontend.services;
+
+public class User {
+	
+	public boolean login(String userName, String Password, int userTypeID) {
+		
+		
+		return true;
+	}
+
+}

@@ -1,0 +1,30 @@
+package ovp.common.resources.dto;
+
+import java.io.Serializable;
+
+public class UserDTO implements Serializable{	
+	
+	private String email;
+	private String userName;
+	private int userTypeId;
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public int getUserTypeId() {
+		return userTypeId;
+	}
+	public void setUserTypeId(int userTypeId) {
+		this.userTypeId = userTypeId;
+	}
+
+}

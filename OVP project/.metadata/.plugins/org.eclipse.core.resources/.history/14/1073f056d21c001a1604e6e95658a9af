@@ -1,0 +1,15 @@
+package ovp.frontend.services;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+
+public class User {
+	
+	public boolean login(String userName, String Password, int userTypeID) {
+		
+		
+		return true;
+	}
+
+}

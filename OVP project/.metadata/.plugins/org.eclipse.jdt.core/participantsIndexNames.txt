@@ -1,3 +1,5 @@
 INDEX VERSION 1.131
+C:\Users\rbarbulescu\Documents\OVP project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1657245619.index
+\ovp.frontend\src\main\java
 C:\Users\rbarbulescu\Documents\OVP project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1343836735.index
 \ovp.frontend\src\main\java

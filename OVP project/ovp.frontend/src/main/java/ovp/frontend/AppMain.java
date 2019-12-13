@@ -7,12 +7,7 @@ import com.sun.jersey.api.client.WebResource;
 public class AppMain {
 
 	public static void main(String[] args) {
-		getUser("username1");
-		getUsers();
-		//createUser("username11", "email10@gmail.com", "password", 3);
-		//changePassword("username10", "parola", "parola", 3);
-		deleteUser("usernameExample");
-		getUserTypes();
+		AppMain.getUsers();
 	}
 	
 	public static void getUserTypes() {

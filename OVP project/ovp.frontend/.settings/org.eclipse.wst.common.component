@@ -4,6 +4,9 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="ovp.common.link-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ovp.common.link/ovp.common.link">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="ovp.frontend"/>
         <property name="java-output-path" value="/ovp.frontend/target/classes"/>
     </wb-module>

@@ -1,0 +1,17 @@
+package ovp.frontend.services;
+
+import java.util.List;
+
+public class User {
+	
+	public boolean login(String userName, String Password, int userTypeID) {
+		
+		
+		return true;
+	}
+	
+	public List<?> getUsers(){
+		return null;
+	}
+
+}
