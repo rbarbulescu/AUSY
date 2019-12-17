@@ -16,12 +16,12 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import ovp.backend.commons.dto.UserDTO;
-import ovp.backend.commons.dto.UserTypeDTO;
 import ovp.backend.persistence.dao.UserDAO;
 import ovp.backend.persistence.dao.UserTypeDAO;
 import ovp.backend.persistence.model.User;
 import ovp.backend.persistence.model.UserType;
+import ovp.common.resources.dto.UserDTO;
+import ovp.common.resources.dto.UserTypeDTO;
 
 @Path("/users")
 public class UserController {

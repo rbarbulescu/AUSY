@@ -11,7 +11,7 @@
 <body>
 	<a href="users">Click</a>
 
-	<table>
+	<table style="border:2px">
 		<thead>
 			<tr>
 				<th>email</th>

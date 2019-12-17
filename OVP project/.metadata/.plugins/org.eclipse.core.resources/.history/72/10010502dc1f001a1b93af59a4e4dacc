@@ -1,0 +1,5 @@
+package ovp.common.resources.dto;
+
+public class UserDTO {
+
+}

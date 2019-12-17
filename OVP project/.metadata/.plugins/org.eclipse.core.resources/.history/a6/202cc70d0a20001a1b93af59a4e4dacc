@@ -1,0 +1,17 @@
+package ovp.common.resources.common;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
+
+import ovp.common.resources.dto.UserDTO;
+
+public class RestClient {
+	
+	private static final String REST_URI = "http://localhost:8080/ovp.backend-0.0.1-SNAPSHOT/rest/users/";
+	private Client client = ClientBuilder.newClient();
+	
+	public UserDTO getJsonUser(int id) {
+		return client.target(REST_URI).path(String.valueOf(id)).request(MediaType.APPLICATION_JSON).get(UserDTO.class);;
+	}
+}

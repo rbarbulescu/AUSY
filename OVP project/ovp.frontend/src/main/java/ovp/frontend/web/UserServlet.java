@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ovp.backend.commons.dto.UserDTO;
+
 import ovp.common.resources.common.AppMain;
+import ovp.common.resources.dto.UserDTO;
 
 
 
@@ -41,7 +42,7 @@ public class UserServlet extends HttpServlet {
 			List<UserDTO> users = AppMain.getUsers();
 			
 			request.setAttribute("users", users);
-			request.getRequestDispatcher("show.jsp").forward(request, response);
+			request.getRequestDispatcher("showUsers.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			// TODO: handle exception

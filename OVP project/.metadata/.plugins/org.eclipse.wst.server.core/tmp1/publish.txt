@@ -1,4 +1,3 @@
 #Tomcat publish data
-#Fri Dec 13 15:26:06 EET 2019
-org.eclipse.jst.j2ee.server\:ovp.common.resources=WEB-INF/lib/ovp.common.resources-0.0.1-SNAPSHOT.jar
-org.eclipse.jst.jee.server\:/binary\:C\:\\Maven\\Local\ Repository\\org\\springframework\\spring-web\\4.3.20.RELEASE\\spring-web-4.3.20.RELEASE.jar=WEB-INF/lib/spring-web-4.3.20.RELEASE.jar
+#Tue Dec 17 13:37:47 EET 2019
+org.eclipse.jst.j2ee.server\:ovp.common.link=WEB-INF/lib/ovp.common.link-0.0.1-SNAPSHOT.jar

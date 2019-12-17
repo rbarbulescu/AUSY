@@ -1,0 +1,12 @@
+package ovp.common.resources.common;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+
+public class RestClient {
+	
+	private static final String REST_URI = "http://localhost:8082/spring-jersey/resources/employees";
+	private Client client = ClientBuilder.newClient();
+	
+	
+}

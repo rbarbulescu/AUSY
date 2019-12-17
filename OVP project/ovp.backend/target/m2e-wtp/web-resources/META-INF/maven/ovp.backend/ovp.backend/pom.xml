@@ -32,6 +32,14 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- Link to common project -->
+		<dependency>
+			<groupId>ovp.common.link</groupId>
+			<artifactId>ovp.common.link</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 		<dependency>
 			<groupId>org.springframework</groupId>

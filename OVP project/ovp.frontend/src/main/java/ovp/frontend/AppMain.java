@@ -5,7 +5,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 public class AppMain {
-
+/*
 	public static void main(String[] args) {
 		AppMain.getUsers();
 	}
@@ -142,5 +142,5 @@ public class AppMain {
 			// TODO: handle exception
 		}
 	}
-
+*/
 }
