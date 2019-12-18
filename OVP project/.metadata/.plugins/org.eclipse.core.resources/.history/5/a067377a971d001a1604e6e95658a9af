@@ -1,5 +1,0 @@
-package ovp.backend.dto;
-
-public class UserTypeDTO {
-
-}

@@ -14,13 +14,7 @@
 			<groupId>ovp.common.link</groupId>
 			<artifactId>ovp.common.link</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<type>jar</type>
 		</dependency>
 
 		<dependency>

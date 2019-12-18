@@ -1,6 +1,0 @@
-@SuppressWarnings("unchecked")
-//				List<UserDTO> users = (List<UserDTO>) out.getEntity(UserDTO.class);
-//				
-//				for(UserDTO u : users) {
-//					System.out.println(u.toString());
-//				}

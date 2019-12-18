@@ -1,3 +1,0 @@
-#Tomcat publish data
-#Tue Dec 17 13:37:47 EET 2019
-org.eclipse.jst.j2ee.server\:ovp.common.link=WEB-INF/lib/ovp.common.link-0.0.1-SNAPSHOT.jar

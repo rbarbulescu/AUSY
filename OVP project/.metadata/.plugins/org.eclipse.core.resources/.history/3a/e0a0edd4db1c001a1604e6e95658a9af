@@ -1,6 +1,0 @@
-<p class = "lead">Users</p>
-<div class = "list-users">
-	<a href = "#" class = "list-user-item">User 1</a>
-	<a href = "#" class = "list-user-item">User 2</a>
-	<a href = "#" class = "list-user-item">User 3</a>
-</div>

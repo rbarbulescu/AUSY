@@ -1,9 +1,0 @@
-package ovp.common.resources.dto;
-
-public class UserDTO {	
-	
-	private String email;
-	private String userName;
-	private int userTypeId;
-
-}
